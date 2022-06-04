@@ -1,0 +1,73 @@
+Add attachment
+POST /rest/issue/{issueIdOrKey}/attachments
+Add one or more attachments to an issue.
+
+This resource expects a multipart post. The media-type multipart/form-data is defined in RFC 1867. Most client libraries have classes that make dealing with multipart posts simple. For instance, in Java the Apache HTTP Components library provides a MultiPartEntity that makes it simple to submit a multipart POST.
+
+In order to protect against XSRF attacks, because this method accepts multipart/form-data, it has XSRF protection on it. This means you must submit a header of X-Atlassian-Token: no-check with the request, otherwise it will be blocked.
+
+The name of the multipart/form-data parameter that contains attachments must be "file"
+
+A simple example to upload a file called "myfile.txt" to issue REST-123:
+
+curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: no-check" -F "file=@myfile.txt" http://myhost/rest/api/2/issue/TEST-123/attachments
+Responses
+STATUS 200 - application/json
+EXAMPLE
+[
+    {
+        "self": "http://www.example.com/jira/rest/api/2.0/attachments/10000",
+        "filename": "picture.jpg",
+        "author": {
+            "self": "http://www.example.com/jira/rest/api/2/user?username=fred",
+            "key": "JIRAUSER10100",
+            "name": "fred",
+            "emailAddress": "fred@example.com",
+            "avatarUrls": {
+                "48x48": "http://www.example.com/jira/secure/useravatar?size=large&ownerId=fred",
+                "24x24": "http://www.example.com/jira/secure/useravatar?size=small&ownerId=fred",
+                "16x16": "http://www.example.com/jira/secure/useravatar?size=xsmall&ownerId=fred",
+                "32x32": "http://www.example.com/jira/secure/useravatar?size=medium&ownerId=fred"
+            },
+            "displayName": "Fred F. User",
+            "active": true,
+            "deleted": false,
+            "timeZone": "Australia/Sydney",
+            "locale": "en_AU"
+        },
+        "created": "2022-04-20T14:48:52.896+0000",
+        "size": 23123,
+        "mimeType": "image/jpeg",
+        "content": "http://www.example.com/jira/attachments/10000",
+        "thumbnail": "http://www.example.com/jira/secure/thumbnail/10000"
+    },
+    {
+        "self": "http://www.example.com/jira/rest/api/2.0/attachments/10001",
+        "filename": "dbeuglog.txt",
+        "author": {
+            "self": "http://www.example.com/jira/rest/api/2/user?username=fred",
+            "key": "JIRAUSER10100",
+            "name": "fred",
+            "emailAddress": "fred@example.com",
+            "avatarUrls": {
+                "48x48": "http://www.example.com/jira/secure/useravatar?size=large&ownerId=fred",
+                "24x24": "http://www.example.com/jira/secure/useravatar?size=small&ownerId=fred",
+                "16x16": "http://www.example.com/jira/secure/useravatar?size=xsmall&ownerId=fred",
+                "32x32": "http://www.example.com/jira/secure/useravatar?size=medium&ownerId=fred"
+            },
+            "displayName": "Fred F. User",
+            "active": true,
+            "deleted": false,
+            "timeZone": "Australia/Sydney",
+            "locale": "en_AU"
+        },
+        "created": "2022-04-20T14:48:52.896+0000",
+        "size": 2460,
+        "mimeType": "text/plain",
+        "content": "http://www.example.com/jira/attachments/10001",
+        "thumbnail": "http://www.example.com/jira/secure/thumbnail/10002"
+    }
+]
+SCHEMA
+STATUS 403Returned if attachments is disabled or if you don't have permission to add attachments to this issue.
+STATUS 404Returned if the requested issue is not found, the user does not have permission to view it, or if the attachments exceeds the maximum configured attachment size.

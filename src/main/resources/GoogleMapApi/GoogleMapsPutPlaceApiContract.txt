@@ -1,0 +1,46 @@
+Google Maps Put Place API  (PUT):
+This API Will update existing place in Server with new values
+
+Complete URL : http://rahulshettyacademy.com/maps/api/place/get/json?place_id=xxxx&key=qaclick123
+
+Base URL :  https://rahulshettyacademy.com
+Resource: /maps/api/place/update/json
+Query Parameters: key, place_id //(place_id  value comes from Add place response)
+Http Method: PUT
+Note: Key value is hardcoded and it is always qaclick123
+
+
+Sample Request:
+{
+"place_id":"8d2573bdf6ceec0e474c5f388fa917fb",
+"address":"70 winter walk, USA",
+"key":"qaclick123"
+}
+
+
+Sample Response for the Provided Place_Id
+{
+
+    	"location":{
+
+    	"lat" : -38.383494,
+
+    	"lng" : 33.427362
+
+    	},
+
+    	"accuracy":50,
+
+    	"name":"Frontline house",
+
+    	"phone_number":"(+91) 983 893 3937",
+
+    	"address" : "29, side layout, cohen 09",
+
+    	"types": ["shoe park","shop"],
+
+    	"website" : "http://google.com",
+
+    	"language" : "French-IN"
+
+}

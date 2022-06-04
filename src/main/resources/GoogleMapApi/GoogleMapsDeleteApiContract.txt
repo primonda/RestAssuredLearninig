@@ -1,0 +1,18 @@
+Google Maps Delete API (POST):
+This API Will delete existing place from Server
+
+Complete URL: https://rahulshettyacademy.com/maps/api/place/delete/json?key=qaclick123
+
+Base URL: https://rahulshettyacademy.com
+Resource: /maps/api/place/delete/json
+Query Parameters: key
+Http request : POST
+
+Sample Body :
+{
+    "place_id":"928b51f64aed18713b0d164d9be8d67f"   	 	//(This value comes from Add place response)
+}
+ Sample Response
+{
+    "status": "OK"
+}
